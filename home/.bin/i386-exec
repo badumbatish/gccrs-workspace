@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-
-qemu-i386 -L /usr/i686-linux-gnu "$@"
