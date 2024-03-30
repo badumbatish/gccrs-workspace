@@ -29,8 +29,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   git \
   libxrandr-dev \
   libncurses5-dev \
-  qemu \
-  qemu-system-i386 \
   silversearcher-ag \
   tmux \
   vim \
@@ -48,7 +46,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   man \
   file \
   gcc-i686-linux-gnu \
-  qemu-user \
   rsync \
   libglib2.0-dev \
   rpcbind \
@@ -61,7 +58,7 @@ RUN useradd --create-home --home-dir /home/workspace --user-group workspace && e
   && chsh -s /bin/bash workspace && echo "workspace ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 WORKDIR /home/workspace
-COPY ./home/* ./
+COPY "./home/*" ./
 
 # RUN git config --global init.defaultBranch main
 
@@ -76,7 +73,7 @@ COPY ./bin/. ./bin
 
 RUN chown -R workspace:workspace /home/workspace
 
-# RUN mv /home/workspace /workspace
+RUN mv /home/workspace /workspace
 
 USER workspace
 
