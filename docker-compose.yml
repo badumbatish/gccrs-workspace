@@ -1,9 +1,9 @@
 version: "3.9"
 services:
-  cs162:
-    image: cs162/pintospace:latest
+  gccrs-workspace:
+    image: gccrs-workspace
     tty: true
     volumes:
       - ./.workspace:/home/workspace
     ports:
-      - "16222:22"
+      - "2200:22"
