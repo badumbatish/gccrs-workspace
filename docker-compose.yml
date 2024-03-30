@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   gccrs-workspace:
-    image: gccrs-workspace
+    image: jjasmine/gccrs-workspace
     tty: true
     volumes:
       - ./.workspace:/home/workspace

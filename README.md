@@ -99,8 +99,7 @@ To avoid entering the password every time you SSH into the container, follow the
 
 1. **Copy Your SSH Key**
    ```bash
-ssh-copy-id -o "PasswordAuthentication yes" -p 2200 -i ~/.ssh/id_ed25519.pub worksp
-ace@127.0.0.1 
+   ssh-copy-id -o "PasswordAuthentication yes" -p 2200 -i ~/.ssh/id_ed25519.pub workspace@127.0.0.1 
    ```
 
    Replace `~/.ssh/id_ed25519.pub` with the path to your SSH public key.
@@ -114,7 +113,7 @@ ace@127.0.0.1
      User workspace
      IdentityFile ~/.ssh/id_ed25519
    ```
-You can now enjoy a passwordless SSH experience for your CS162 workspace:
+You can now enjoy a passwordless SSH experience for your gccrs workspace:
 `ssh gccrs-wp`
 
 Happy coding!
