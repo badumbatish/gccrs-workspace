@@ -52,6 +52,8 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   rsync \
   libglib2.0-dev \
   rpcbind \
+  build-essential libgmp3-dev libmpfr-dev libmpc-dev flex bison autogen dejagnu \
+  cargo \ 
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -61,11 +63,12 @@ RUN useradd --create-home --home-dir /home/workspace --user-group workspace && e
 WORKDIR /home/workspace
 COPY ./home/. ./
 
-RUN git config --global init.defaultBranch main
+# RUN git config --global init.defaultBranch main
 
-COPY ./install_scripts/. /install_scripts
-WORKDIR /install_scripts
-RUN ./create_group0.sh && ./create_student0.sh && ./install_bochs.sh && ./install_rust.sh && ./squish/install.sh
+
+# COPY ./install_scripts/. /install_scripts
+# WORKDIR /install_scripts
+# RUN ./create_group0.sh && ./create_student0.sh && ./install_bochs.sh && ./install_rust.sh && ./squish/install.sh
 
 WORKDIR /
 COPY entrypoint.sh .
