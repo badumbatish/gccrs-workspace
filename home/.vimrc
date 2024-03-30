@@ -1,91 +1,54 @@
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+" Code formatting settings for Vim.
+"
+" To enable this for GCC files by default, you can either source this file
+" in your .vimrc via autocmd:
+"   :au BufNewFile,BufReadPost path/to/gcc/* :so path/to/gcc/contrib/vimrc
+" or source the script manually for each newly opened file:
+"   :so contrib/vimrc
+" You could also use numerous plugins that enable local vimrc e.g.
+" mbr's localvimrc or thinca's vim-localrc (but note that the latter
+" is much less secure). To install local vimrc config, run
+"   $ make vimrc
+" from GCC build folder.
+" 
+" Copyright (C) 2014-2024 Free Software Foundation, Inc.
+"
+" This program is free software; you can redistribute it and/or modify
+" it under the terms of the GNU General Public License as published by
+" the Free Software Foundation; either version 3 of the License, or
+" (at your option) any later version.
+"
+" This program is distributed in the hope that it will be useful,
+" but WITHOUT ANY WARRANTY; without even the implied warranty of
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+" GNU General Public License for more details.
+"
+" You should have received a copy of the GNU General Public License
+" along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+function! SetStyle()
+  let l:fname = expand("%:p")
+  let l:ext = fnamemodify(l:fname, ":e")
+  let l:c_exts = ['c', 'h', 'cpp', 'cc', 'C', 'H', 'def', 'java']
+  if stridx(l:fname, 'libsanitizer') != -1
+    return
+  endif
+  if l:ext != "py"
+    setlocal tabstop=8
+    setlocal softtabstop=2
+    setlocal shiftwidth=2
+    setlocal noexpandtab
+  endif
+  if &filetype == "gitcommit"
+    setlocal textwidth=72
+  else
+    setlocal textwidth=79
+  endif
+  setlocal formatoptions-=ro formatoptions+=cqlt
+  if index(l:c_exts, l:ext) != -1 || &filetype == "c" || &filetype == "cpp"
+    setlocal cindent
+    setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,f0,h2,p4,t0,+2,(0,u0,w1,m0
+  endif
+endfunction
 
-" Syntax highlighting always on
-syntax on
-
-" Detect filetype then load plugin file, set syntax highlighting,
-" and set indentation accordingly
-filetype plugin indent on
-
-" Unix style line endings
-set fileformat=unix
-
-" Saves backup, swap, and undo files to ~/.vim/tmp instead of current directory
-if !isdirectory($HOME . '/.vim/tmp')
-    call mkdir($HOME . '/.vim/tmp', 'p', 0777)
-endif
-
-set backupdir=~/.vim/tmp
-set directory=~/.vim/tmp
-set undodir=~/.vim/tmp
-
-set swapfile      " keep a swap file
-set backup        " keep a backup file (restore to previous version)
-set undofile      " keep an undo file (undo changes after closing)
-set history=1000  " keep 1000 lines of command line history
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set autoread      " automatically reload a file if it is changed outside of vim
-
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-    set mouse=a
-endif
-
-" Put these in an autocmd group, so that we can delete them easily.
-augroup vimrcEx
-au!
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-\ if line("'\"") >= 1 && line("'\"") <= line("$") |
-\   exe "normal! g`\"" |
-\ endif
-
-augroup END
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(':DiffOrig')
-    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-            \ | wincmd p | diffthis
-endif
-
-if has('langmap') && exists('+langnoremap')
-    " Prevent that the langmap option applies to characters that result from a
-    " mapping.  If unset (default), this may break plugins (but it's backward
-    " compatible).
-    set langnoremap
-endif
-
-" Tab settings
-set virtualedit=onemore " allow moving cursor one character past the end of the line
-set autoindent
-set smartindent
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-
-
-set number " line numbers on
-set laststatus=2 " Always show statusline
-
-augroup override_filetype_detection
-    autocmd!
-    autocmd BufRead,BufNewFile *.h set filetype=c
-augroup END
+call SetStyle()
