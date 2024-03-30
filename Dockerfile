@@ -61,7 +61,7 @@ RUN useradd --create-home --home-dir /home/workspace --user-group workspace && e
   && chsh -s /bin/bash workspace && echo "workspace ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 WORKDIR /home/workspace
-COPY ./home/. ./
+COPY ./home/* ./
 
 # RUN git config --global init.defaultBranch main
 
@@ -74,11 +74,9 @@ WORKDIR /
 COPY entrypoint.sh .
 COPY ./bin/. ./bin
 
-RUN find /home/workspace/. -not -type d -not -path "./code/*" -not -name ".version" -print0 | LC_ALL=C sort -z | xargs -0 sha256sum | sha256sum > /home/workspace/.version
-
 RUN chown -R workspace:workspace /home/workspace
 
-RUN mv /home/workspace /workspace
+# RUN mv /home/workspace /workspace
 
 USER workspace
 
