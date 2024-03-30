@@ -45,7 +45,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   openssh-server \
   man \
   file \
-  gcc-i686-linux-gnu \
   rsync \
   libglib2.0-dev \
   rpcbind \

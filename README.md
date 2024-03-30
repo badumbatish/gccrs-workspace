@@ -1,11 +1,13 @@
-# 🫘 CS162 Workspace 🫘
+# gccrs-workspace
 
 ## Introduction
 
-Welcome to the CS162 Workspace, a Docker-based environment for CS 162! This image is designed to provide a standardized development environment for students regardless of host architecture or OS, without the hassle of VPN'ing into an instructional machine.
+Welcome to the gccrs-workspace, an ARM64 Docker-based environment for the gccrs designed to be used with MacOS!
+
+This is created to standardized the development process.
 
 ## Prerequisites
-Docker is a cross-platform tool for managing containers. You can use Docker to download and run the Workspace we have prepared for this course. The Workspace for the course may undergo significant changes every term; do not use one from a previous semester.
+Docker is a cross-platform tool for managing containers. 
 
 First, you will have to download and install Docker to your machine so you can access the Workspace. This can be done in one of following two ways.
 
@@ -13,17 +15,13 @@ First, you will have to download and install Docker to your machine so you can a
 - **(or)** download both the [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/)
 
 ## Getting Started
-Lucky for you, we have already built the image for both ARM and x86 machines (hosted on [Docker Hub](https://hub.docker.com/r/cs162/pintospace))!
+jjasmine only built an ARM version to work with with MacOS.
 
-After Docker has been installed, type the following into your terminal to initalize the Docker Workspace and begin an SSH session. These commands will download our Docker Workspace from our server and launch it. The download of the Workspace will take some time and requires an Internet connection.
-
-_Note: Docker commands will generally have to be run with sudo access, so for the commands below you might need to use `sudo docker-compose up -d`._
-
-1. **Clone this GitHub Repository**
+1. **Clone this GitHub Repository via https**
   
 2. **Navigate to the Repository**
    ```bash
-   cd cs162-workspace
+   cd gccrs-workspace
    ```
 
 3. **Run Docker Compose for the first time**
@@ -36,7 +34,22 @@ _Note: Docker commands will generally have to be run with sudo access, so for th
    Wait until you see "Docker workspace is ready!" in the terminal. The Workspace is now ready (obviously 🙄).
    
    Use <kbd>Ctrl</kbd> + <kbd>C</kbd> to stop the command.
-
+Example output:
+```
+[+] Running 2/0
+ ✔ Network gccrs-workspace_default              Created                                                                          0.0s 
+ ✔ Container gccrs-workspace-gccrs-workspace-1  Created                                                                          0.0s 
+Attaching to gccrs-workspace-1
+gccrs-workspace-1  |  * Starting OpenBSD Secure Shell server sshd        [ OK ] 
+gccrs-workspace-1  | Docker workspace is ready!
+gccrs-workspace-1  | Entry directory is /
+gccrs-workspace-1  | CD-ing into /workspace
+gccrs-workspace-1  | Current directory is /workspace
+gccrs-workspace-1  | Downloading .clang-format...
+gccrs-workspace-1  | Downloading .vimrc...
+gccrs-workspace-1  | Downloaded all quality of life script
+gccrs-workspace-1  | gccrs-workspace is ready
+```
 4. **Starting the container in the background**
    ```bash
    docker-compose up -d
@@ -45,11 +58,29 @@ _Note: Docker commands will generally have to be run with sudo access, so for th
 
 5. **SSH into the Container**
    ```bash
-   ssh workspace@127.0.0.1 -p 16222
+   ssh workspace@127.0.0.1 -p 2200 -o "PasswordAuthentication yes"
    ```
 
    Use the password `workspace` the first time you SSH into the container.
-  
+
+Example output:
+```
+jjsm@MacBook-Air ~/D/c/gccrs-workspace (main)> ssh workspace@127.0.0.1 -p 2200 -o "PasswordAuthentication yes"
+The authenticity of host '[127.0.0.1]:2200 ([127.0.0.1]:2200)' can't be established.
+ED25519 key fingerprint is SHA256:LSt4ID5MGVhlh5qaIaI5OuG3GjTers4nI7B/0ywQAEg.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[127.0.0.1]:2200' (ED25519) to the list of known hosts.
+workspace@127.0.0.1's password: 
+Permission denied, please try again.
+workspace@127.0.0.1's password: 
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.6.16-linuxkit aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+workspace@9c72bba2b0d5:~$ 
+```
 6. **Stop the container**
    
    _Within your host machine's shell (not the Workspace shell you ssh'd into)_:
@@ -68,7 +99,8 @@ To avoid entering the password every time you SSH into the container, follow the
 
 1. **Copy Your SSH Key**
    ```bash
-   ssh-copy-id -p 16222 -i ~/.ssh/id_ed25519.pub workspace@127.0.0.1
+ssh-copy-id -o "PasswordAuthentication yes" -p 2200 -i ~/.ssh/id_ed25519.pub worksp
+ace@127.0.0.1 
    ```
 
    Replace `~/.ssh/id_ed25519.pub` with the path to your SSH public key.
@@ -76,18 +108,21 @@ To avoid entering the password every time you SSH into the container, follow the
 2. **Update SSH Config**
    To alias the full SSH command, add the following lines to your `~/.ssh/config` file:
    ```
-   Host docker162
+   Host gccrs-wp
      HostName 127.0.0.1
-     Port 16222
+     Port 2200
      User workspace
      IdentityFile ~/.ssh/id_ed25519
    ```
 You can now enjoy a passwordless SSH experience for your CS162 workspace:
-`ssh docker162`
+`ssh gccrs-wp`
 
 Happy coding!
 
 ## (OPTIONAL) Updating the image
+
+**Not updated yet.**
+
 **You only need to do this if staff push changes to the image. We will let you know if/when this happens.**
 
 You may need to update the image if changes are pushed. You could completely reset your workspace by deleting the .workspace directory. However, we provide a mechanism to safely update by tracking changes with git.
@@ -113,3 +148,14 @@ Simply run `docker build .`
 If you would like to deploy changes to Docker Hub for ARM and x86, first sign in with the `cs162` account and run the following buildx command:
 
 `docker buildx build --platform linux/amd64,linux/arm64  -t cs162/pintospace:latest --push .`
+
+## FAQ and Errors
+
+### WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
+It is possible that you've registered port 2200 with another host
+
+Run
+`vim  ~/.ssh/known_hosts` and search for `[127.0.0.1]:2200` and delete those lines to reset them.
+
+Another method you can do is to use a different port via
+`docker-compose.yml` settings

@@ -2,7 +2,7 @@
 
 set -e
 
-SRC=/home/workspace
+SRC=/workspace
 
 sudo service ssh start
 
@@ -31,6 +31,5 @@ echo "Downloaded all quality of life script"
 
 
 echo "gccrs-workspace is ready"
-echo "Run 'python3 initialize.py -h' for options on first start up"
 
 /bin/bash
