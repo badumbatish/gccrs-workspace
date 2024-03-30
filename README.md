@@ -118,6 +118,9 @@ You can now enjoy a passwordless SSH experience for your gccrs workspace:
 
 Happy coding!
 
+
+## gccrs cloning
+You can clone your fork down in `~` now.
 ## (OPTIONAL) Updating the image
 
 **Not updated yet.**
