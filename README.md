@@ -272,4 +272,4 @@ This section describes different steps prior and after of cloning your fork.
 
    You might want to run `chmod +x /home/workspace/.vscode-server/extensions/ms-vscode.cpptools-1.19.9-linux-arm64/bin/cpptools` and roll back the `C/C++ Extension Pack` to `v1.2.0`. 
 
-   This error has been reported to occur on `v1.3.0`.
+   This error has been reported to occur on `v1.3.0` of the extension.
