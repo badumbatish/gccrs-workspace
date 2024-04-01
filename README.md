@@ -133,10 +133,11 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
 
 ## gccrs cloning
+This section describes different steps prior and after of cloning your fork.
 
 1.  **Setting up ssh keys**
-
-   Please create a new ssh key in the workspace or copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
+   
+      Please create a new ssh key in the workspace or copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
 
 2. **Cloning your fork**
 
@@ -146,13 +147,13 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
    git clone `your fork .git here`
    ```
 
-3. **Setting up remote**
+3. **Setting up remote (RECOMMENDED, OPTIONAL)**
    After cloning, run this in your forked repo to set an upstream remote
    ```bash
    git remote add upstream https://github.com/Rust-GCC/gccrs.git
    ```
 
-4. **Setting up customization of git**
+4. **Setting up customization of git (RECOMMENDED, OPTIONAL)**
    In your forked and cloned repo, run
    ```bash
    ./contrib/gcc-git-customization.sh
@@ -179,6 +180,39 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
    users/me        git@github.com:badumbatish/gccrs.git (fetch)
    users/me        git@github.com:badumbatish/gccrs.git (push)
    ```
+
+5. **Speeding up git (RECOMMENDED, OPTIONAL)**
+
+   This section is based on [git performance](https://www.git-tower.com/blog/git-performance).
+
+   I only recommend these features:
+
+   
+   Run
+   ```bash
+   git config feature.manyFiles true
+   ```
+   to enable a newer index file version that is smaller in size and thus gets rewritten faster after modifying files in the index.
+
+   and run 
+   ```bash
+   git update-index --index-version 4
+   ```
+   to switch to this new indexing
+
+   Run
+   ```bash
+   git config core.fsmonitor true
+   ```
+   to [enable](https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor) FSMonitor, Git's built-in file system monitor daemon.
+   
+   Now run 
+   ```bash
+   git fsmonitor--daemon status
+   ``` 
+   to see the current status
+
+
 ## (OPTIONAL) Updating the image
 
    Initially every version of the image should be sufficient for developing gccrs. New updates will only bring quality of life updates if MacOS-based maintainers of gccrs suggest so if not stated otherwise.
@@ -211,15 +245,19 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
 ## FAQ and Errors
 
-- **WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED**
+- **WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED error on ssh**
 
-   It is possible that you've registered port 2200 with another host. There are two methods to resolve this.
+   It is possible that you've registered port 2200 (the default port of gccrs-workspace) with another host. There are two methods to resolve this.
 
-   Run
-   `vim  ~/.ssh/known_hosts` and search for `[127.0.0.1]:2200` and delete those lines to reset them.
+   1. Run
+   `vim  ~/.ssh/known_hosts` or your favorite editor on the file and search for `[127.0.0.1]:2200` and delete those lines to reset them.
 
-   Another method you can do is to use a different port via
+   2. Another method you can do is to use a different port via
    `docker-compose.yml` settings
+
+- **git operations are taking a long time. What is going on?**
+
+   Please refer to `Speeding up git` subsection in the [gccrs-cloning](#gccrs-cloning) section
 
 ### VS-Code related
 
