@@ -273,3 +273,14 @@ This section describes different steps prior and after of cloning your fork.
    You might want to run `chmod +x /home/workspace/.vscode-server/extensions/ms-vscode.cpptools-1.19.9-linux-arm64/bin/cpptools` and roll back the `C/C++ Extension Pack` to `v1.2.0`. 
 
    This error has been reported to occur on `v1.3.0` of the extension.
+
+## Acknowledgements
+
+This repository was originally forked from [CS162](https://cs162.org/) and thus benefitted heavily from the infrastructure that was set up by CS162 course staff.
+
+Contributors including (but not excluding):
+- https://github.com/ShreyasKallingal
+- https://github.com/PotatoParser
+- https://github.com/jel221
+
+I decided to break fork since I think the repo has deviated from the original structure of course staff.
