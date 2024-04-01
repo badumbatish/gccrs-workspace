@@ -267,3 +267,9 @@ This section describes different steps prior and after of cloning your fork.
 - **Vscode's C++ analysis server is taking a very long time to scan, what is going on?**
 
    gccrs is a big repo, hence it will take a long time to scan every file. I suggest only open vscode in `gccrs/gcc/rust` to limit the processing requirements of vscode.
+
+- **Vscode's C++ analysis is not working.**
+
+   You might want to run `chmod +x /home/workspace/.vscode-server/extensions/ms-vscode.cpptools-1.19.9-linux-arm64/bin/cpptools` and roll back the `C/C++ Extension Pack` to `v1.2.0`. 
+
+   This error has been reported to occur on `v1.3.0`.
