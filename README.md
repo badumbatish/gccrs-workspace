@@ -131,6 +131,9 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
    Happy coding!
 
+## Default Features
+
+> *On going work. Jasmine's going to work. Ork Ork Ork~~~*
 
 ## gccrs cloning
 This section describes different steps prior and after of cloning your fork.
