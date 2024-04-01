@@ -39,12 +39,6 @@ bind "set show-all-if-ambiguous on"
 # Set default editor
 export EDITOR='vim'
 
-# Set `man`'s section search order so that C stdlib functions
-# and syscalls appear as the default result. This is helpful for students,
-# since otherwise they would need to manually specify a section number in
-# some cases (e.g. for `write`, which is both a user program and a syscall).
-export MANSECT='2:3:3posix:1:n:l:8:3pm:3perl:3am:5:4:9:6:7'
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 

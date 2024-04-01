@@ -38,8 +38,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   python3 \
   python3-pip \
   python-is-python3 \
-  libjson-c-dev \
-  libfuse-dev \
   sudo \
   fzf \
   openssh-server \
@@ -47,7 +45,8 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   file \
   rsync \
   libglib2.0-dev \
-  rpcbind \
+  zsh \
+  fish \
   build-essential libgmp3-dev libmpfr-dev libmpc-dev flex bison autogen dejagnu \
   cargo \ 
   && apt-get clean \
