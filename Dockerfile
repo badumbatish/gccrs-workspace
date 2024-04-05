@@ -37,6 +37,7 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   wget \
   python3 \
   python3-pip \
+  python3-git \
   python-is-python3 \
   sudo \
   fzf \
@@ -52,6 +53,8 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# Dependencies for git customization
+RUN pip install requests unidiff
 RUN useradd --create-home --home-dir /home/workspace --user-group workspace && echo workspace:workspace | chpasswd \
   && chsh -s /bin/bash workspace && echo "workspace ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
@@ -67,7 +70,6 @@ COPY "./home/*" ./
 
 WORKDIR /
 COPY entrypoint.sh .
-COPY ./bin/. ./bin
 
 RUN chown -R workspace:workspace /home/workspace
 
