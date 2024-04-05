@@ -140,8 +140,18 @@ This section describes different steps prior and after of cloning your fork.
 
 1.  **Setting up ssh keys**
    
-      Please create a new ssh key in the workspace or copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
+      Please create a new ssh key in the workspace in this [generating a new ssh-key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) article
+      in order for git to recognize your ownership of your fork.
+      
+      Alternatively, you can follow these steps to copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
 
+      - In your original MacOS terminal (not the docker container), run `pbcopy < ~/.ssh/id_ed25519` to copy your ssh key into your copy-paste board.
+
+      - In your docker environment terminal, run `vim ~/.ssh/id_ed25519` and paste your ssh-key into that file, type `:wq` to close the file via vim
+      
+      - In the same docker environment terminal, run `chmod 600 ~/.ssh/id_ed25519` so that only you can read and write, this helps keep ssh quiet on error `Permissions 0xxx for '/home/workspace/.ssh/id_ed25519' are too open.`
+
+      You can now clone your fork with this newly copy-pasted ssh key.
 2. **Cloning your fork**
 
    After this, you can clone your fork down in `~` now.
