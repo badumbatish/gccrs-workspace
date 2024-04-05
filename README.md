@@ -266,7 +266,17 @@ This section describes different steps prior and after of cloning your fork.
    `vim  ~/.ssh/known_hosts` or your favorite editor on the file and search for `[127.0.0.1]:2200` and delete those lines to reset them.
 
    2. Another method you can do is to use a different port via
-   `docker-compose.yml` settings
+   `docker-compose.yml` settings where the line involved ports are highlighted
+   ```yml
+      version: "3.9"
+      services:
+      gccrs-workspace:
+         image: jjasmine/gccrs-workspace
+         tty: true
+         volumes:
+            - ./.workspace:/home/workspace
+         ports:
+            - "2200:22"     <---- CHANGE YOUR PORT FROM 2200:22 TO xxxx:22    
 
 - **git operations are taking a long time. What is going on?**
 
