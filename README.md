@@ -140,10 +140,10 @@ This section describes different steps prior and after of cloning your fork.
 
 1.  **Setting up ssh keys**
    
-      Please create a new ssh key in the workspace in this [generating a new ssh-key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) article
+      Please **create a new ssh key** in the workspace in this [generating a new ssh-key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) article
       in order for git to recognize your ownership of your fork.
       
-      Alternatively, you can follow these steps to copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
+      Alternatively, to **not create a new ssh key**, you can follow these steps to copy your ssh key to `.workspace` in order for git to recognize your ownership of your fork.
 
       - In your original MacOS terminal (not the docker container), run `pbcopy < ~/.ssh/id_ed25519` to copy your ssh key into your copy-paste board.
 
@@ -214,7 +214,7 @@ This section describes different steps prior and after of cloning your fork.
 
 5. **You're done!**
 
-   Congrats on setting up your work space for gccrs, now, please refer back to the Linux section of gccrs at https://github.com/Rust-GCC/gccrs#linux to
+   Congrats on setting up your work space for gccrs, now, please refer back to the [Linux section](https://github.com/Rust-GCC/gccrs#linux) of gccrs to
    continue build and test all the test cases before development.
 
    Alternative if you have followed all the steps from 1 to 4 and am currently in gccrs, run this code to start building the code base by default.
@@ -231,7 +231,7 @@ This section describes different steps prior and after of cloning your fork.
    make check-rust
    ```
 
-   
+
 6. **Speeding up git (RECOMMENDED, OPTIONAL)**
 
    This section is based on [git performance](https://www.git-tower.com/blog/git-performance).
