@@ -181,6 +181,23 @@ This section describes different steps prior and after of cloning your fork.
    - **The local name for the upstream repository** - normally, the default (origin) will be correct. 
    - **Your account name** on gcc.gnu.org: (Not sure of the usefulness here, just press enter to continue)
    - **The prefix to use for your personal branches** - the default is me, but you can change this if you prefer. (Not sure of the usefulness here, just press enter to continue).
+   - **Whether you want to install prepare-commit-msg git hook for 'git commit-mklog' alias** - You really should do this to avoid being overwhelmed by the work flow of gccrs in general.
+
+   Example output via `fish` shell during git customization
+   ```
+   workspace@1a7cad37dc38 ~/gccrs (master)> ./contrib/gcc-git-customization.sh
+   Your name [(no default)]? jjasmine
+   Your email address (for git commits) [(no_default)]? ###############
+   Local name for upstream repository [origin]? 
+   Account name on gcc.gnu.org (for your personal branches area) [workspace]? 
+
+   Local branch prefix for personal branches you want to share
+   (local branches starting <prefix>/ can be pushed directly to your
+   personal area on the gcc server) [me]? 
+
+   Install prepare-commit-msg git hook for 'git commit-mklog' alias [yes]? yes
+   Setting up tracking for personal namespace workspace in remotes/users/me
+   ```
 
    After setting up the repo via every step, you should be able to see something similar to this:
    
@@ -194,6 +211,7 @@ This section describes different steps prior and after of cloning your fork.
    users/me        git@github.com:badumbatish/gccrs.git (fetch)
    users/me        git@github.com:badumbatish/gccrs.git (push)
    ```
+
 
 5. **Speeding up git (RECOMMENDED, OPTIONAL)**
 
