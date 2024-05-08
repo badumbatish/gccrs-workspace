@@ -158,6 +158,7 @@ This section describes different steps prior and after of cloning your fork.
    ```bash
    cd ~
    git clone `your fork .git here`
+   cd `your fork.git here` # change directory into your fork
    ```
 
 3. **Setting up remote (RECOMMENDED, OPTIONAL)**
