@@ -157,8 +157,8 @@ This section describes different steps prior and after of cloning your fork.
    After this, you can clone your fork down in `~` now.
    ```bash
    cd ~
-   git clone `your fork .git here`
-   cd `your fork.git here` # change directory into your fork
+   git clone `your fork .git here` gccrs # Clone your fork and rename your cloned folder to gccrs
+   cd gccrs # change directory into your fork
    ```
 
 3. **Setting up remote (RECOMMENDED, OPTIONAL)**
@@ -212,8 +212,27 @@ This section describes different steps prior and after of cloning your fork.
    users/me        git@github.com:badumbatish/gccrs.git (push)
    ```
 
+5. **You're done!**
 
-5. **Speeding up git (RECOMMENDED, OPTIONAL)**
+   Congrats on setting up your work space for gccrs, now, please refer back to the Linux section of gccrs at https://github.com/Rust-GCC/gccrs#linux to
+   continue build and test all the test cases before development.
+
+   Alternative if you have followed all the steps from 1 to 4 and am currently in gccrs, run this code to start building the code base by default.
+   All the dependencies should have been installed for you.
+
+   Change from `make -j2` to a higher core count to build faster.
+
+   ```
+   mkdir ../gccrs-build && cd ../gccrs-build && ../gccrs/configure --prefix=$HOME/gccrs-install --disable-bootstrap --enable-multilib --enable-languages=rust && make -j2 # Change to -jX to use X core to build.
+   ```
+
+   Then run the tests:
+   ```
+   make check-rust
+   ```
+
+   
+6. **Speeding up git (RECOMMENDED, OPTIONAL)**
 
    This section is based on [git performance](https://www.git-tower.com/blog/git-performance).
 
