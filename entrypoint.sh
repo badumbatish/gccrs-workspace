@@ -2,15 +2,15 @@
 
 set -e
 
-SRC=/workspace
+HOME=/home
 
 sudo service ssh start
 
 echo "Docker workspace is ready!"
 echo "Entry directory is $(pwd)"
 
-echo "CD-ing into ${SRC}"
-cd "${SRC}"
+echo "CD-ing into ${HOME}"
+cd "${HOME}"
 echo "Current directory is $(pwd)"
 
 if [ -f .clang-format ]; then
@@ -29,6 +29,8 @@ fi
 
 echo "Downloaded all quality of life script"
 
+echo "CD-ing into ${HOME}/workspace"
+cd "${HOME}/workspace"
 
 echo "gccrs-workspace is ready"
 

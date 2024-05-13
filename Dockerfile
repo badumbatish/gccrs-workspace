@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 # Set timezone (important for some packages) 
 ARG TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-ENV HOME=/home/workspace
+ENV HOME=/home
 
 RUN yes | unminimize
 
@@ -58,11 +58,8 @@ RUN pip install requests unidiff
 RUN useradd --create-home --home-dir /home/workspace --user-group workspace && echo workspace:workspace | chpasswd \
   && chsh -s /bin/bash workspace && echo "workspace ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-WORKDIR /home/workspace
+WORKDIR ${HOME}
 COPY "./home/*" ./
-
-# RUN git config --global init.defaultBranch main
-
 
 # COPY ./install_scripts/. /install_scripts
 # WORKDIR /install_scripts
@@ -71,9 +68,7 @@ COPY "./home/*" ./
 WORKDIR /
 COPY entrypoint.sh .
 
-RUN chown -R workspace:workspace /home/workspace
-
-RUN mv /home/workspace /workspace
+RUN chown -R workspace:workspace ${HOME}
 
 USER workspace
 

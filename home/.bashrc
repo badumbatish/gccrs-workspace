@@ -125,6 +125,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-. ~/.cs162.bashrc
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
