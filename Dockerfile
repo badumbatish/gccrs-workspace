@@ -14,47 +14,66 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   --mount=target=/var/cache/apt,type=cache,sharing=locked \
   rm -f /etc/apt/apt.conf.d/docker-clean \
   &&  apt-get update \
-  && apt-get install -y \
+  # Add newest git version
+  && add-apt-repository ppa:git-core/ppa 
+
+# TERMINAL UTILITIES
+RUN apt-get install -y \
+  curl \
+  tmux \
+  vim \
+  wget \
+  sudo \
+  fzf \
+  openssh-server \
+  man \
+  file \
+  rsync 
+  
+# SHELL FLAVORS
+RUN apt-get install -y \
+  zsh \
+  fish 
+
+# RUST DEPENDENCIES
+RUN apt-get instlal -y \
+  cargo 
+
+# PYTHON DEPENDENCIES
+RUN apt-get install -y \
+  python3 \
+  python3-pip \
+  python3-git \
+  python-is-python3 
+
+
+# C/C++ DEPENDENCIES 
+RUN apt-get install -y \
   binutils \
   cgdb \
   clang \
   clang-format \
   cmake \
-  curl \
   exuberant-ctags \
   g++ \
   gcc \
   gdb \
   gdb-multiarch \
   git \
-  libxrandr-dev \
-  libncurses5-dev \
   silversearcher-ag \
-  tmux \
-  vim \
   valgrind \
   autoconf \
-  wget \
-  python3 \
-  python3-pip \
-  python3-git \
-  python-is-python3 \
-  sudo \
-  fzf \
-  openssh-server \
-  man \
-  file \
-  rsync \
   libglib2.0-dev \
-  zsh \
-  fish \
-  build-essential libgmp3-dev libmpfr-dev libmpc-dev flex bison autogen dejagnu \
-  cargo \ 
-  && apt-get clean \
+  build-essential libgmp3-dev libmpfr-dev libmpc-dev flex bison autogen dejagnu
+
+# CLEAN UP APT GET CACHE
+RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# Dependencies for git customization
+# GIT CUSTOMIZATION DEPENDENCIES
 RUN pip install requests unidiff
+
+
 RUN useradd --create-home --home-dir /home/workspace --user-group workspace && echo workspace:workspace | chpasswd \
   && chsh -s /bin/bash workspace && echo "workspace ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
