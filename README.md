@@ -35,6 +35,23 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
    This command will build and start the Docker container defined in the `docker-compose.yml` file. If needed, you can change the port used for SSH within this file.
 
+   The first time you run `docker-compose up`, something like this should happen
+   ```
+   [+] Running 10/12
+   gccrs-workspace [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿] 679.8MB / 684.1MB Pulling                                                               40.9s 
+   ✔ f4bb4e8dca02 Pull complete                                                                                           1.2s 
+   ✔ b34c89ba2949 Pull complete                                                                                           0.9s 
+   ✔ 61d8855b6961 Pull complete                                                                                           3.8s 
+   ✔ b0e8950b3326 Download complete                                                                                      37.0s 
+   ✔ 7a2dfbe0ca39 Download complete                                                                                       2.4s 
+   ✔ 705d5ce2ef7a Download complete                                                                                       3.3s 
+   ⠹ 4f4fb700ef54 Downloading  [==================================================>] 32B/32B                             39.3s 
+   ✔ 26eaf58bb146 Download complete                                                                                       4.7s 
+   ✔ e6a4a2a7b1b9 Download complete                                                                                       5.0s 
+   ✔ d5ba4437dd44 Download complete                                                                                       5.6s 
+   ✔ fe30df8d0cd6 Download complete
+   ```
+
    Wait until you see "Docker workspace is ready!" in the terminal. The Workspace is now ready (obviously 🙄).
 
    Use <kbd>Ctrl</kbd> + <kbd>C</kbd> to stop the command.
@@ -42,19 +59,24 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
    Example output via `fish` shell:
    ```
-   [+] Running 2/0
-   ✔ Network gccrs-workspace_default              Created                                                                          0.0s 
-   ✔ Container gccrs-workspace-gccrs-workspace-1  Created                                                                          0.0s 
+   [+] Running 0/0
+   ⠋ Container gccrs-workspace-gccrs-workspace-1  Recreated                                                                                                                                0.0s 
    Attaching to gccrs-workspace-1
    gccrs-workspace-1  |  * Starting OpenBSD Secure Shell server sshd        [ OK ] 
    gccrs-workspace-1  | Docker workspace is ready!
    gccrs-workspace-1  | Entry directory is /
-   gccrs-workspace-1  | CD-ing into /workspace
-   gccrs-workspace-1  | Current directory is /workspace
+   gccrs-workspace-1  | CD-ing into /home
+   gccrs-workspace-1  | Current directory is /home
    gccrs-workspace-1  | Downloading .clang-format...
    gccrs-workspace-1  | Downloading .vimrc...
    gccrs-workspace-1  | Downloaded all quality of life script
    gccrs-workspace-1  | gccrs-workspace is ready
+   gccrs-workspace-1  | Currently at /home with directory structure:
+   gccrs-workspace-1  | .
+   gccrs-workspace-1  | |-- initialize.py
+   gccrs-workspace-1  | `-- workspace
+   gccrs-workspace-1  | 
+   gccrs-workspace-1  | 1 directory, 1 file
    ```
 4. **Starting the container in the background**
    ```bash
@@ -292,7 +314,29 @@ This section describes different steps prior and after of cloning your fork.
 
    If you would like to deploy changes to Docker Hub, first sign in with the `jjasmine` account and run the following buildx command:
 
-   `docker buildx build --platform linux/arm64  -t jjasmine/gccrs-workspace --push .`
+   `docker buildx build --platform linux/arm64  -t jjasmine/gccrs-workspace:vx.y --push .` where x, y are integers
+
+   Something like this should be displayed:
+   ```
+   [+] Building 159.7s (22/23)                                                          docker:desktop-linux
+   => pushing jjasmine/gccrs-workspace with docker                                                    158.9s
+   => => pushing layer b34e060e7f68                                                                     6.2s
+   => => pushing layer a0d20f2d597d                                                                     5.0s
+   => => pushing layer 25b7309d5bdb                                                                     5.1s
+   => => pushing layer 5f70bf18a086                                                                   158.5s
+   => => pushing layer 30d28f08fbad                                                                     4.3s
+   => => pushing layer 22cb36038158                                                                    10.7s
+   => => pushing layer 902f74f878ca                                                                    11.0s
+   => => pushing layer 706723e7a464 156.98MB / 1.07GB                                                 158.5s
+   => => pushing layer e1327057188d 108.13MB / 181.12MB                                               158.5s
+   => => pushing layer 2b967fea2034 120.12MB / 723.98MB                                               158.5s
+   => => pushing layer 0c6ee22ab34f 109.58MB / 149.92MB                                               158.5s
+   => => pushing layer 718cff4cb42c 100.02MB / 185.59MB                                               158.5s
+   => => pushing layer e765fc14f7f3                                                                   158.5s
+   => => pushing layer 0e53a3b142a5                                                                   158.5s
+   => => pushing layer bfa656ccdc47                                                                   158.5s
+   => => pushing layer 842bef16b8fb                                                                   158.5s
+   ```
 
 ## FAQ and Errors
 

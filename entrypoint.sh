@@ -29,9 +29,11 @@ fi
 
 echo "Downloaded all quality of life script"
 
-echo "CD-ing into ${HOME}/workspace"
-cd "${HOME}/workspace"
-
 echo "gccrs-workspace is ready"
+echo "Currently at ${HOME} with directory structure:"
+
+tree -L 1
+
+echo "Your ~workspace~ is ready"
 
 /bin/bash

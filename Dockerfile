@@ -14,8 +14,9 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
   --mount=target=/var/cache/apt,type=cache,sharing=locked \
   rm -f /etc/apt/apt.conf.d/docker-clean \
   &&  apt-get update \
-  # Add newest git version
-  && add-apt-repository ppa:git-core/ppa 
+  && apt-get install software-properties-common -y \
+  && add-apt-repository ppa:git-core/ppa \
+  && apt-get update
 
 # TERMINAL UTILITIES
 RUN apt-get install -y \
@@ -28,7 +29,8 @@ RUN apt-get install -y \
   openssh-server \
   man \
   file \
-  rsync 
+  rsync \
+  tree
   
 # SHELL FLAVORS
 RUN apt-get install -y \
@@ -36,7 +38,7 @@ RUN apt-get install -y \
   fish 
 
 # RUST DEPENDENCIES
-RUN apt-get instlal -y \
+RUN apt-get install -y \
   cargo 
 
 # PYTHON DEPENDENCIES
