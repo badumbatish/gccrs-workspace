@@ -255,36 +255,9 @@ This section describes different steps prior and after of cloning your fork.
    ```
 
 
-6. **Speeding up git (RECOMMENDED, OPTIONAL)**
+6. **Speeding up (RECOMMENDED, OPTIONAL)**
 
-   This section is based on [git performance](https://www.git-tower.com/blog/git-performance).
-
-   I only recommend these features:
-
-   
-   Run
-   ```bash
-   git config feature.manyFiles true
-   ```
-   to enable a newer index file version that is smaller in size and thus gets rewritten faster after modifying files in the index.
-
-   and run 
-   ```bash
-   git update-index --index-version 4
-   ```
-   to switch to this new indexing
-
-   Run
-   ```bash
-   git config core.fsmonitor true
-   ```
-   to [enable](https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor) FSMonitor, Git's built-in file system monitor daemon.
-   
-   Now run 
-   ```bash
-   git fsmonitor--daemon status
-   ``` 
-   to see the current status
+   Please see speeding_up.md to speed up your workflow
 
 
 ## (OPTIONAL) Updating the image
