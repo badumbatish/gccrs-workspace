@@ -77,6 +77,7 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
    gccrs-workspace-1  | `-- workspace
    gccrs-workspace-1  | 
    gccrs-workspace-1  | 1 directory, 1 file
+   gccrs-workspace-1  | Your ~workspace~ is ready
    ```
 4. **Starting the container in the background**
    ```bash
