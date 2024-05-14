@@ -125,4 +125,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export PATH="/home:$PATH"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
