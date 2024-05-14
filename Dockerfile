@@ -10,11 +10,11 @@ RUN yes | unminimize
 # Install packages (break this up into checkpoints if you're having build issues)
 # Apt caching from: https://stackoverflow.com/a/72851168
 # TODO: could probably remove some of these packages
-RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
-  --mount=target=/var/cache/apt,type=cache,sharing=locked \
-  rm -f /etc/apt/apt.conf.d/docker-clean \
-  &&  apt-get update \
-  && apt-get install software-properties-common -y \
+
+# --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+#   --mount=target=/var/cache/apt,type=cache,sharing=locked \
+# rm -f /etc/apt/apt.conf.d/docker-clean \
+RUN apt-get install software-properties-common -y \
   && add-apt-repository ppa:git-core/ppa \
   && apt-get update
 
@@ -30,7 +30,8 @@ RUN apt-get install -y \
   man \
   file \
   rsync \
-  tree
+  tree \
+  git=1:2.43.2-0ppa1~ubuntu22.04.1
   
 # SHELL FLAVORS
 RUN apt-get install -y \
@@ -61,7 +62,6 @@ RUN apt-get install -y \
   gcc \
   gdb \
   gdb-multiarch \
-  git \
   silversearcher-ag \
   valgrind \
   autoconf \
