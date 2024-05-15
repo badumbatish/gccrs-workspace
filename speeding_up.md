@@ -9,10 +9,7 @@ For incremental build, use ccache to speed up your build.
 From [First contributions](https://github.com/Rust-GCC/gccrs/wiki/First-contributions), your configuration of make might look like this
 
 ```
-../gccrs/configure CC="ccache clang" CXX="ccache clang++" CFLAGS="-O0 -g3" \
-   CXXFLAGS="-O0 -g3" \
-   LD_FLAGS="-fuse-ld=mold" \
-   --disable-bootstrap --enable-multilib --enable-languages=rust
+../gccrs/configure CC="ccache clang" CXX="ccache clang++" CFLAGS="-O0 -g3" CXXFLAGS="-O0 -g3" LD_FLAGS="-fuse-ld=mold" --disable-bootstrap --disable-multilib --enable-languages=rust
 ```
 
 This configuration will require additional tools but may speedup your workflow.
