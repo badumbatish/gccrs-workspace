@@ -133,6 +133,8 @@ jjasmine only built an ARM version to work with with MacOS, please don't use thi
 
    To avoid entering the password every time you SSH into the container, follow these additional steps from your host machine:
 
+   Having fired up your environment with `docker-compose up -d`
+
 1. **Copy Your SSH Key**
    ```bash
    ssh-copy-id -o "PasswordAuthentication yes" -p 2200 -i ~/.ssh/id_ed25519.pub workspace@127.0.0.1 
