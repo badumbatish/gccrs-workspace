@@ -2,13 +2,24 @@
 
 ## Build speed up
 
-On your first time logging into the workspace or on your first time running this script, run 
-```bash
-bash build_optimization.sh
+There is different options of linker to speed up your build. You can use lld or mold instead of the normal GNU ld to speed up your linking.
+
+For incremental build, use ccache to speed up your build.
+
+From [First contributions](https://github.com/Rust-GCC/gccrs/wiki/First-contributions), your configuration of make might look like this
+
+```
+../configure CC="ccache clang" CXX="ccache clang++" CFLAGS="-O0 -g3" \
+   CXXFLAGS="-O0 -g3" \
+   LD_FLAGS="-fuse-ld=mold" \
+   --disable-bootstrap --enable-multilib --enable-languages=rust path_to_your_src
 ```
 
-from anywhere to switch from standard ld linker to LLVM ld linker
-
+This configuration will require additional tools but may speedup your workflow.
+- ccache to cache build artifacts.
+- clang because output is less convoluted and there are more warning.
+- Debug informations are enabled.
+- mold is used instead of ld for linking stage.
 
 ## Git speed up
 
