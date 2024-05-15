@@ -56,6 +56,8 @@ RUN apt-get install -y \
   cgdb \
   clang \
   clang-format \
+  mold \
+  ccache \ 
   cmake \
   exuberant-ctags \
   g++ \
