@@ -56,6 +56,8 @@ RUN apt-get install -y \
   cgdb \
   clang \
   clang-format \
+  clangd \
+  bear \
   mold \
   ccache \ 
   cmake \
@@ -83,6 +85,7 @@ RUN useradd --create-home --home-dir /home/workspace --user-group workspace && e
 
 WORKDIR ${HOME}
 COPY "./home/*" ./
+COPY "./home/.config/" ./
 
 # COPY ./install_scripts/. /install_scripts
 # WORKDIR /install_scripts
