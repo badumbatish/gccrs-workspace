@@ -352,6 +352,13 @@ This section describes different steps prior and after of cloning your fork.
 
    This error has been reported to occur on `v1.3.0` of the extension.
 
+### Compile work related
+
+- **configure: error: no usable dependency style found .libs yes checking for strstr...**'
+  
+  make[1]: [Makefile:3092: configure-build-libcpp] Error 1
+  Try sudo with your command when you run `make ...` or `make check-rust ...`
+
 ## Acknowledgements
 
 This repository was originally forked from [CS162](https://cs162.org/) and thus benefitted heavily from the infrastructure that was set up by CS162 course staff.
